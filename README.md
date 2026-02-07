@@ -2,6 +2,17 @@
 
 A simple GIF viewer for Windows.
 
+## How to Install the program
+
+1. **Go on the Releases page (https://github.com/Vladozs/GIFF/releases)**
+
+2. **Download the version you need (GIFF.exe)**
+
+3. Set GIFF.exe as the default program for opening GIF files.
+
+4. Open the gif file to check that it works.
+
+
 ## How to Use
 
 1. **Open GIF files directly:**
