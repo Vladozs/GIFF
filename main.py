@@ -72,7 +72,7 @@ class GIFPlayer:
                             icon_found = True
                             break
                         except Exception as e:
-                            print("Error: " + e)
+                            print("Error: ", e)
                     elif icon_path.endswith('.png'):
                         # Для .png конвертируем в PhotoImage
                         try:
@@ -83,7 +83,7 @@ class GIFPlayer:
                             icon_found = True
                             break
                         except Exception as e:
-                            print("Error: " + e)
+                            print("Error: ", e)
             if not icon_found:
                 print("No icon")
                 # Создаем простую иконку по умолчанию
@@ -376,5 +376,4 @@ def main():
 
 
 if __name__ == "__main__":
-
     main()
