@@ -2,6 +2,11 @@
 
 A simple GIF viewer for Windows.
 
+## Why use it?
+
+A real-life example: I played Gartic Phone with my friends and really liked one of the rounds. I saved it as a GIF, but here's the problem: Windows Media Player doesn't allow you to pause a GIF or change its speed, so I have to catch the moment when the right image/text appears and either take a screenshot or try to see it in time.
+That's why I made GIFF. It's easy to use and allows you to view GIFs frame by frame, slow down the speed, and pause at the right moments. You can also use it as the default application for opening GIF files. Try it yourself and see!
+
 ## How to Install the program
 
 1. **Go on the Releases page (https://github.com/Vladozs/GIFF/releases)**
