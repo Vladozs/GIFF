@@ -1,6 +1,6 @@
 import tkinter as tk
 from tkinter import filedialog, Scale, HORIZONTAL
-from PIL import Image, ImageTk
+from PIL import Image, ImageTk, ImageSequence
 import sys
 import os
 import time
@@ -33,6 +33,7 @@ class GIFPlayer:
 
         self.create_widgets()
 
+        # Проверяем аргументы командной строки
         if len(sys.argv) > 1:
             file_path = sys.argv[1]
             if os.path.exists(file_path):
@@ -186,15 +187,31 @@ class GIFPlayer:
             self.cached_images = {}
             self.frame_accumulator = 0
 
-            for frame in range(gif.n_frames):
-                gif.seek(frame)
-                frame_image = gif.copy().convert('RGBA')
-                self.original_frames.append(frame_image)
+            # Простой и надежный способ загрузки кадров
+            frame_count = 0
+            while True:
+                try:
+                    # Копируем текущий кадр
+                    frame_image = gif.copy().convert('RGBA')
+                    self.original_frames.append(frame_image)
 
-                delay = gif.info.get('duration', 100)
-                if delay == 0 or delay < 10:
-                    delay = 100
-                self.delays.append(delay)
+                    # Получаем задержку
+                    delay = gif.info.get('duration', 100)
+                    if delay == 0 or delay < 10:
+                        delay = 100
+                    self.delays.append(delay)
+
+                    frame_count += 1
+
+                    # Пытаемся перейти к следующему кадру
+                    gif.seek(frame_count)
+
+                except EOFError:
+                    # Достигнут конец файла
+                    break
+                except Exception as e:
+                    print(f"Error loading frame {frame_count}: {e}")
+                    break
 
             self.current_frame = 0
             self.play_pause_btn.config(state=tk.NORMAL)
@@ -212,6 +229,8 @@ class GIFPlayer:
 
         except Exception as e:
             print(f"Error: {e}")
+            import traceback
+            traceback.print_exc()
 
     def get_scaled_image(self, img, width, height):
         cache_key = f"{id(img)}_{width}_{height}"
